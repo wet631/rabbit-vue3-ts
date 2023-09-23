@@ -10,5 +10,6 @@ export interface ApiRes<T> {
     id: string
     name: string
     picture: string
+    open: boolean
     children: CategoryItem[]
   }

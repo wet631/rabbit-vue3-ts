@@ -1,8 +1,12 @@
-<script lang="ts" setup name="SubCategory">
+<template>
+  <div class="category">{{ route.params }}</div>
+</template>
+
+<script lang="ts" name="TopCategory" setup>
+import { useRoute } from 'vue-router';
+const route = useRoute()
 
 </script>
-<template>
-  <div class="category">二级分类组件</div>
-</template>
+
 
 <style></style>

@@ -9,18 +9,20 @@ category.getAllCategory()
         <li class="home">
             <RouterLink to="/">首页</RouterLink>
         </li>
-        <li v-for="item in category.list" :key="item.id">
-            <!-- <a href="#">{{ item.name }}</a> -->
-            <RouterLink to="/">{{ item.name }}</RouterLink>
-            <!-- 新增 -->
-            <div class="layer">
+        <li v-for="(item, index) in category.list" :key="index" @mouseenter="category.show(item.id)"
+            @mouseleave="category.hide(item.id)">
+            <!-- 一级分类的 -->
+            <RouterLink @click="category.hide(item.id)" :to="item.id ? `/category/${item.id}` : '/'">{{ item.name }}
+            </RouterLink>
+            <!-- 弹层 -->
+            <div :class="{ open: item.open }" v-if="item.children" class="layer">
                 <ul>
-                    <li v-for="i in 10" :key="i">
-                        <a href="#">
-                            <img src="https://yanxuan.nosdn.127.net/cc361cf40d4f81c7eccefed1ad18face.png?quality=95&imageView"
-                                alt="" />
-                            <p>果干</p>
-                        </a>
+                    <!-- 二级 -->
+                    <li v-for="sub in item.children" :key="sub.id">
+                        <RouterLink :to="`/category/sub/${sub.id}`" @click="category.hide(item.id)">
+                            <img :src="sub.picture" alt="" />
+                            <p>{{ sub.name }}</p>
+                        </RouterLink>
                     </li>
                 </ul>
             </div>
@@ -28,7 +30,7 @@ category.getAllCategory()
     </ul>
 </template>
 
-<style lang="less" scoped>
+<style scoed lang="less">
 .app-header-nav {
     width: 820px;
     display: flex;
@@ -60,10 +62,10 @@ category.getAllCategory()
                 border-bottom: 1px solid @xtxColor;
             }
 
-            >.layer {
-                height: 132px;
-                opacity: 1;
-            }
+            // > .layer {
+            //   height: 132px;
+            //   opacity: 1;
+            // }
         }
     }
 }
@@ -80,6 +82,11 @@ category.getAllCategory()
     opacity: 0;
     box-shadow: 0 0 5px #ccc;
     transition: all 0.2s 0.1s;
+
+    &.open {
+        height: 132px;
+        opacity: 1;
+    }
 
     ul {
         display: flex;
