@@ -6,7 +6,13 @@ import "normalize.css";
 import "@/assets/styles/common.less";
 import router from './router'
 import { createPinia } from 'pinia'
+// 注册组建的形式 
+// import XtxSkeleton from "@/components/skeleton/index.vue"
+import XtxUI from '@/components/index'
 const app = createApp(App);
 app.use(router);
-app.use(createPinia())
+// 注册组建 组建名 组建值
+// app.component('XtxSkeleton',XtxSkeleton)
+app.use(XtxUI) 
+app.use(createPinia()) 
 app.mount("#app");
