@@ -39,3 +39,16 @@ export type BannerItem = {
   imgUrl: string;
   type: string;
 };
+export type GoodItem = {
+  desc: string
+  id: string
+  name: string
+  picture: string
+  price: string
+}
+export interface HotGoods {
+  id: string
+  picture: string
+  title: string
+  alt: string
+}
