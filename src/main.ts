@@ -10,9 +10,10 @@ import { createPinia } from 'pinia'
 // import XtxSkeleton from "@/components/skeleton/index.vue"
 import XtxUI from '@/components/index'
 const app = createApp(App);
+app.use(createPinia()) 
 app.use(router);
 // 注册组建 组建名 组建值
 // app.component('XtxSkeleton',XtxSkeleton)
 app.use(XtxUI) 
-app.use(createPinia()) 
+
 app.mount("#app");
