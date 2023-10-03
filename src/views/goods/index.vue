@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import useStore from "@/store";
 import { storeToRefs } from "pinia";
-import { watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import GoodsSales from "./components/goods-sales.vue";
 import GoodsName from "./components/goods-name.vue";
@@ -9,7 +9,7 @@ import GoodsSku from "./components/goods-sku.vue";
 import GoodsImage from "@/views/goods/components/goods-image.vue";
 const { goods } = useStore();
 const route = useRoute();
-
+const count = ref(5);
 // 1.一进入页面立刻执行
 // 2.依赖路由参数 路由参数变化 就需要进行执行
 watchEffect(() => {
@@ -24,7 +24,7 @@ const { info } = storeToRefs(goods);
 
 const changeSku = (skuId: string) => {
   // console.log(skuId)
-  const sku = info.value.skus.find((item:any) => item.id === skuId);
+  const sku = info.value.skus.find((item: any) => item.id === skuId);
   if (sku) {
     info.value.inventory = sku.inventory;
     info.value.price = sku.price;
@@ -60,10 +60,9 @@ const changeSku = (skuId: string) => {
               <!-- 商品名称  -->
               <GoodsName :goods="info" />
               <!-- sku组件 规格组件 -->
-              <GoodsSku
-                :goods="info"
-                @changeSku="changeSku"
-              />
+              <GoodsSku :goods="info" @changeSku="changeSku" />
+              <!-- 数字选择框 -->
+              <XtxNumbox v-model="count" :min="2" :max="10"></XtxNumbox>
             </div>
           </div>
 
