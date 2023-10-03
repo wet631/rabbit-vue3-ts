@@ -5,6 +5,7 @@ import { watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import GoodsSales from "./components/goods-sales.vue";
 import GoodsName from "./components/goods-name.vue";
+import GoodsSku from "./components/goods-sku.vue";
 import GoodsImage from "@/views/goods/components/goods-image.vue";
 const { goods } = useStore();
 const route = useRoute();
@@ -15,10 +16,21 @@ watchEffect(() => {
   const id = route.params.id as string;
   // 必须id存在且是商品页才能发请求
   if (id && route.fullPath === `/goods/${id}`) {
+    goods.resetGoodsInfo();
     goods.getGoodsInfo(id);
   }
 });
 const { info } = storeToRefs(goods);
+
+const changeSku = (skuId: string) => {
+  // console.log(skuId)
+  const sku = info.value.skus.find((item:any) => item.id === skuId);
+  if (sku) {
+    info.value.inventory = sku.inventory;
+    info.value.price = sku.price;
+    info.value.oldPrice = sku.oldPrice;
+  }
+};
 </script>
 
 <template>
@@ -45,7 +57,13 @@ const { info } = storeToRefs(goods);
               <GoodsSales />
             </div>
             <div class="spec">
+              <!-- 商品名称  -->
               <GoodsName :goods="info" />
+              <!-- sku组件 规格组件 -->
+              <GoodsSku
+                :goods="info"
+                @changeSku="changeSku"
+              />
             </div>
           </div>
 
