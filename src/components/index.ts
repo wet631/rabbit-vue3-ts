@@ -2,7 +2,10 @@
 import XtxSkeleton from "@/components/skeleton/index.vue";
 import XtxCarousel from "@/components/carousel/index.vue";
 import XtxMore from "./more/index.vue";
-import defaultImg from '@/assets/images/200.png'
+import defaultImg from "@/assets/images/200.png";
+import Bread from "./Bread/index.vue";
+import BreadItem from "./Bread/Item.vue";
+import XtxCity from '@/components/city/index.vue'
 import { App } from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
 export default {
@@ -12,28 +15,30 @@ export default {
     app.component("XtxSkeleton", XtxSkeleton);
     app.component("XtxCarousel", XtxCarousel);
     app.component("XtxMore", XtxMore);
-
+    app.component("XtxBread", Bread);
+    app.component("XtxBreadItem", BreadItem);
+    app.component('XtxCity', XtxCity)
     // 构建指令
-    app.directive('lazy', {
-        mounted(el: HTMLImageElement, { value }) {
-          // 图片的懒加载逻辑
-          // 参数1：回调函数
-          // 参数2：可选的配置
+    app.directive("lazy", {
+      mounted(el: HTMLImageElement, { value }) {
+        // 图片的懒加载逻辑
+        // 参数1：回调函数
+        // 参数2：可选的配置
         //   el 目标元素  binding指令的相关信息==>value
-          const { stop } = useIntersectionObserver(el, ([{ isIntersecting }]) => {
-            if (isIntersecting) {
-              // 停止监听
-              stop()
-              // 给el元素设置src属性
-              // value = '123.jpg'
-              el.src = value
-              // 如果图片加载失败，显示默认的图片
-              el.onerror = function () {
-                el.src =  defaultImg
-              }
-            }
-          })
-        }
-      })
+        const { stop } = useIntersectionObserver(el, ([{ isIntersecting }]) => {
+          if (isIntersecting) {
+            // 停止监听
+            stop();
+            // 给el元素设置src属性
+            // value = '123.jpg'
+            el.src = value;
+            // 如果图片加载失败，显示默认的图片
+            el.onerror = function () {
+              el.src = defaultImg;
+            };
+          }
+        });
+      },
+    });
   },
 };
