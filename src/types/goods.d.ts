@@ -1,3 +1,10 @@
+type GoodsDetail = {
+  pictures: string[];
+  properties: {
+    name: string;
+    value: string;
+  }[];
+};
 // sku 类型 最小库存单元 => 决定是否禁用
 // sku的类型
 export type Sku = {
@@ -18,7 +25,7 @@ export type SpecValue = {
   name: string;
   picture: string;
   selected: boolean; //选中还是未选中
-  disabled: boolean;//控制禁用与否
+  disabled: boolean; //控制禁用与否
 };
 
 // 商品的规格类型
@@ -53,6 +60,7 @@ export type GoodsInfo = {
   }[];
   specs: Spec[];
   skus: Sku[];
+  details: GoodsDetail;
 };
 
 // 城市列表类型
