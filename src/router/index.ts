@@ -4,11 +4,11 @@ import Layout from "@/views/layout/index.vue";
 import Home from "@/views/home/index.vue";
 const router = createRouter({
   history: createWebHashHistory(),
-  // 返回到顶部 
+  // 返回到顶部
   scrollBehavior: () => {
     return {
       top: 0,
-    }
+    };
   },
   routes: [
     {
@@ -29,14 +29,18 @@ const router = createRouter({
         },
         // 不跟id 无法查询到对应的商品信息
         {
-          path: '/goods/:id',
-          component: () => import('@/views/goods/index.vue'),
+          path: "/goods/:id",
+          component: () => import("@/views/goods/index.vue"),
         },
       ],
     },
     {
       path: "/login",
       component: () => import("@/views/login/index.vue"),
+    },
+    {
+      path: "/login/callback",
+      component: () => import("@/views/login/callback.vue"),
     },
   ],
 });
