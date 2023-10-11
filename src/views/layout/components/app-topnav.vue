@@ -1,12 +1,23 @@
 <script lang="ts" setup name="AppTopnav">
 import useStore from "@/store";
 import router from "@/router";
+import Confirm from "@/components/confirm";
 import Message from "@/components/message";
 const { user } = useStore();
-const logout = () => {
-  user.logout();
-  router.push("/login");
-  Message.success("退出成功");
+const logout = async () => {
+  await Confirm({
+    title: "温馨提示",
+    text: "你确定要退出吗",
+  })
+    .then(() => {
+      user.logout();
+      router.push("/login");
+      Message.success("退出成功");
+
+    })
+    .catch(() => {
+      console.log("取消");
+    });
 };
 </script>
 

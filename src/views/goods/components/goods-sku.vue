@@ -37,7 +37,10 @@ const changeSelected = (spec: Spec, specValue: SpecValue) => {
     const key = selectArr.join(SplitStr);
     const result = pathMap[key];
     const skuId = result[0];
-    emit('changeSku', skuId);
+    emit("changeSku", skuId);
+  } else {
+    // 取消的时候也要进行传递 
+    emit("changeSku", "");
   }
 };
 

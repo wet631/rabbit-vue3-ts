@@ -10,6 +10,9 @@ import XtxNumbox from '@/components/numbox/index.vue'
 import XtxButton from '@/components/button/index.vue'
 import XtxCheckbox from '@/components/checkbox/index.vue'
 import XtxMessage from '@/components/message/message.vue'
+import XtxDialog from '@/components/dialog/index.vue'
+import XtxSwitch from '@/components/dialog/index.vue'
+
 import { App } from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
 export default {
@@ -26,6 +29,8 @@ export default {
     app.component('XtxButton', XtxButton)
     app.component('XtxCheckbox', XtxCheckbox)
     app.component('XtxMessage', XtxMessage)
+    app.component('XtxDialog', XtxDialog)
+    app.component('XtxSwitch', XtxSwitch)
     // 构建指令
     app.directive("lazy", {
       mounted(el: HTMLImageElement, { value }) {

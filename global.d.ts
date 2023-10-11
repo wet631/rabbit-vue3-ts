@@ -7,7 +7,9 @@ import XtxCity from "@/components/city/index.vue";
 import XtxNumbox from "@/components/numbox/index.vue";
 import XtxButton from "@/components/button/index.vue";
 import XtxCheckbox from "@/components/checkbox/index.vue";
-import XtxMessage from '@/components/message/index.vue'
+import XtxMessage from "@/components/message/index.vue";
+import XtxDialog from "@/components/dialog/index.vue";
+import XtxSwitch from '@/components/dialog/index.vue'
 declare module "vue" {
   export interface GlobalComponents {
     // 组建名        组建类型
@@ -20,7 +22,9 @@ declare module "vue" {
     XtxNumbox: typeof XtxNumbox;
     XtxButton: typeof XtxButton;
     XtxCheckbox: typeof XtxCheckbox;
-    XtxMessage: typeof XtxMessage
+    XtxMessage: typeof XtxMessage;
+    XtxDialog: typeof XtxDialog;
+    XtxSwitch:typeof XtxSwitch;
   }
 }
 export {};

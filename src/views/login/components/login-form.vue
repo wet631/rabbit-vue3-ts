@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import useStore from "@/store/index";
 import Message from "@/components/message";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useField, useForm } from "vee-validate";
 import { watch } from "vue";
 import { useCountDown } from "@/utils/hooks";
@@ -11,11 +11,11 @@ import {
   mobileRule,
   codeRule,
   passwordRule,
-  isAgreeRule
-} from '@/utils/validate'
+  isAgreeRule,
+} from "@/utils/validate";
 const type = ref<"account" | "mobile">("account");
 const { user } = useStore();
-
+const route = useRoute();
 const form = ref({
   account: "",
   password: "",
@@ -31,7 +31,7 @@ const { validate, resetForm } = useForm({
     mobile: mobileRule,
     code: codeRule,
     password: passwordRule,
-    isAgree: isAgreeRule
+    isAgree: isAgreeRule,
   },
   initialValues: {
     mobile: "13666666666",
@@ -68,8 +68,11 @@ const login = async () => {
     if (res.errors.mobile || res.errors.code || res.errors.isAgree) return;
     await user.mobileLogin(mobile.value, code.value);
   }
+  //  获取到地址栏的查询参数
+  // 通过第三方登录，跳转到首页
   Message.success("登录成功");
-  router.push("/");
+  const redirectUrl = (route.query.redirectUrl as string) || "/";
+  router.push(redirectUrl);
 };
 
 // 监听type的变化

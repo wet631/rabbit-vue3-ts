@@ -3,6 +3,7 @@ import { Profile } from "@/types/user";
 import request from "@/utils/request";
 import { getProfile, removeProfile, setProfile } from "@/utils/storage";
 import { defineStore } from "pinia";
+import useStore from "..";
 export default defineStore({
   id: "user",
   // 状态
@@ -21,6 +22,9 @@ export default defineStore({
       this.profile = res.data.result;
       // 让本地存
       setProfile(res.data.result);
+      
+      const {cart } = useStore()
+      cart.mergeLocalCart()
     },
     //获取短信验证码
     async sendMobileMsg(mobile: string) {
@@ -38,11 +42,17 @@ export default defineStore({
       // 1. 保存用户信息到 state 中
       this.profile = res.data.result;
       // setProfile(res.data.result);
+      const { cart } = useStore();
+      cart.mergeLocalCart();
     },
     // 退出
     logout() {
+      // 只清除了个人信息
       this.profile = {} as Profile;
       removeProfile();
+      const { cart } = useStore();
+      // 清空购物车
+      cart.clearCart();
     },
     // qq登录
     //  source: 1为pc，2为webapp，3为微信小程序, 4为Android, 5为ios, 6为qq, 7为微信
@@ -54,6 +64,8 @@ export default defineStore({
       // 1. 保存用户信息到 state 中
       this.profile = res.data.result;
       setProfile(res.data.result);
+      const { cart } = useStore();
+      cart.mergeLocalCart();
     },
     // 绑定qq的短信验证码
     async sendQQBindMsg(mobile: string) {
@@ -73,6 +85,9 @@ export default defineStore({
       // 1. 保存用户信息到 state 中
       this.profile = res.data.result;
       setProfile(res.data.result);
+
+      const { cart } = useStore();
+      cart.mergeLocalCart();
     },
     // 无账号无绑定 获取验证码
     async sendQQPathMsg(mobile: string) {
@@ -91,6 +106,8 @@ export default defineStore({
       // 1. 保存用户信息到 state 中
       this.profile = res.data.result;
       setProfile(res.data.result);
+      const { cart } = useStore();
+      cart.mergeLocalCart();
     },
   },
   getters: {},
