@@ -2,11 +2,12 @@
 import { useRoute, useRouter } from "vue-router";
 import { OrderPayInfo } from "@/types/order";
 import { onMounted, ref, watch } from "vue";
-import request from "@/utils/request";
+import request, { baseURL } from "@/utils/request";
 import { ApiRes } from "@/types/data";
 import { useCountDown } from "@/utils/hooks";
 import dayjs from "dayjs";
 import Message from "@/components/message";
+import axios from "axios";
 // 1.解析订单号
 // 2.基于订单号 发送请求 获取订单数据 去支付
 const route = useRoute();
@@ -40,6 +41,12 @@ onMounted(async () => {
 const formatTime = (time: number) => {
   return dayjs.unix(time).format("mm分ss秒");
 };
+
+
+
+
+const redirectUrl = encodeURIComponent('http://www.corho.com:8080/#/pay/callback')
+const payUrl = `${baseURL}pay/aliPay?orderId=${route.query.id}&redirect=${redirectUrl}`
 </script>
 <template>
   <div class="xtx-pay-page">
@@ -70,7 +77,7 @@ const formatTime = (time: number) => {
         <div class="item">
           <p>支付平台</p>
           <a class="btn wx" href="javascript:;"></a>
-          <a class="btn alipay" href="javascript:;"></a>
+          <a class="btn alipay" :href="payUrl"></a>
         </div>
         <div class="item">
           <p>支付方式</p>

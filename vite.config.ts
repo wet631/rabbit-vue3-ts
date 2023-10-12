@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 // 标准用法 node环境 需要使用require
 // 原因在于vite中没有不支持require()
 // const path = require('path')
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueSetupExtend from "vite-plugin-vue-setup-extend";
 import path from "path";
 // https://vitejs.dev/config/
@@ -12,7 +13,9 @@ export default defineConfig({
       reactivityTransform: true,
     }),
     vueSetupExtend(),
+    vueJsx()
   ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

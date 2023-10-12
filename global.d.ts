@@ -9,7 +9,10 @@ import XtxButton from "@/components/button/index.vue";
 import XtxCheckbox from "@/components/checkbox/index.vue";
 import XtxMessage from "@/components/message/index.vue";
 import XtxDialog from "@/components/dialog/index.vue";
-import XtxSwitch from '@/components/dialog/index.vue'
+import XtxSwitch from "@/components/dialog/index.vue";
+import XtxTabs from '@/components/tabs/index.vue'
+import XtxTabsPane from '@/components/tabs/pane.vue'
+
 declare module "vue" {
   export interface GlobalComponents {
     // 组建名        组建类型
@@ -24,7 +27,9 @@ declare module "vue" {
     XtxCheckbox: typeof XtxCheckbox;
     XtxMessage: typeof XtxMessage;
     XtxDialog: typeof XtxDialog;
-    XtxSwitch:typeof XtxSwitch;
+    XtxSwitch: typeof XtxSwitch;
+    XtxTabs: typeof XtxTabs;
+    XtxTabsPane: typeof XtxTabsPane;
   }
 }
 export {};

@@ -13,7 +13,6 @@ const logout = async () => {
       user.logout();
       router.push("/login");
       Message.success("退出成功");
-
     })
     .catch(() => {
       console.log("取消");
@@ -27,7 +26,7 @@ const logout = async () => {
       <ul>
         <template v-if="user.profile.token">
           <li>
-            <a href="javascript:;"
+            <a @click="$router.push('/member')" href="javascript:;"
               ><i class="iconfont icon-user"></i>
               {{ user.profile.nickname || user.profile.account }}</a
             >
@@ -40,7 +39,8 @@ const logout = async () => {
           <li><a href="javascript:;">免费注册</a></li>
         </template>
 
-        <li><a href="javascript:;">我的订单</a></li>
+        <li><a href="javascript:;" @click="
+        $router.push('/member/order')">我的订单</a></li>
         <li><a href="javascript:;">会员中心</a></li>
         <li><a href="javascript:;">帮助中心</a></li>
         <li><a href="javascript:;">关于我们</a></li>
